@@ -5,31 +5,22 @@ class BookShelf extends Component {
 
     render() {
 
-        return (
-            <div className="list-books">
-                <div className="list-books-title">
-                    <h1>MyReads</h1>
-                </div>
-                <div className="list-books-content">
-                    <section key={shelf}>
-                        <div className="bookshelf">
-                            <h2 className="bookshelf-title">{shelf}</h2>
-                            <div className="bookshelf-books">
-                                <ol className="books-grid">
-                                    <Books bookRow={this.props.state.bookRow}/>
-                                </ol>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-                <div className="open-search">
-                    <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
-                </div>
-            </div>
-            
-        )
+        const { title, books } = this.props
         
-
+        return (    
+            <div className="bookshelf">
+                <h2 className="bookshelf-title">{title}</h2>
+                <div className="bookshelf-books">
+                    <ol className="books-grid">
+                        {books.map(book => (
+                            <li key={book.id}>
+                                <Books {...book}/>
+                            </li>
+                        ))}
+                    </ol>
+                </div>
+            </div>                        
+        )
     }
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import BookShelf from './bookshelf'
 
-class BookCase extends React.Component {
+class BookCase extends Component {
 
     // Helper Function
     getBooksByStatus(status) {
@@ -11,7 +11,7 @@ class BookCase extends React.Component {
 
     // Book status getters
     get booksToRead() {
-        return this.getBooksByStatus('toRead')
+        return this.getBooksByStatus('wantToRead')
     }
 
     get booksHaveRead() {
@@ -25,11 +25,18 @@ class BookCase extends React.Component {
 
     render() {
         return (
-            <div>
-                <BookShelf title='Books I am Reading' books={this.booksCurrentlyReading}/>
-                <BookShelf title='Books I Want to Read' books={this.booksToRead}/>
-                <BookShelf title='Books I have Read' books={this.booksHaveRead}/>
- 
+            <div className="list-books">
+                <div className="list-books-title">
+                    <h1>MyReads</h1>
+                </div>
+                <div className="list-books-content">
+                    <BookShelf title='Books I am Reading' books={this.booksCurrentlyReading}/>
+                    <BookShelf title='Books I Want to Read' books={this.booksToRead}/>
+                    <BookShelf title='Books I have Read' books={this.booksHaveRead}/>
+                </div>
+                <div className="open-search">
+                    <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+                </div>
             </div>
         )
     }
