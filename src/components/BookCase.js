@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import BookShelf from './bookshelf'
 import { Link } from 'react-router-dom';
 
@@ -14,15 +15,12 @@ class BookCase extends Component {
     get booksToRead() {
         return this.getBooksByStatus('wantToRead')
     }
-
     get booksHaveRead() {
-        return this.getBooksByStatus('Read')
+        return this.getBooksByStatus('read')
     }
-
     get booksCurrentlyReading() {
         return this.getBooksByStatus('currentlyReading')
     }    
-
 
     render() {
         return (
