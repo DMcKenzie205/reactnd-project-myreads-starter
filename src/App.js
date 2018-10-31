@@ -13,14 +13,17 @@ class BooksApp extends React.Component {
         showSearchPage: false
     }
 
-     componentDidMount() {
+    // Check that component has rendered before retrieving books
+    componentDidMount() {
         BooksAPI.getAll().then((books) => {
             this.setState({ books })
         })
-     }
+    }
 
-     changeShelf = (book, shelf) => {
-        BooksAPI.update(book, shelf)
+    // Helper function for changing the shelf a book is assigned to
+    changeShelf = (book, shelf) => {
+        BooksAPI.update(book, shelf);
+
         BooksAPI.getAll().then((books) => {
             this.setState({ books: books })
         })
