@@ -23,15 +23,28 @@ class BookCase extends Component {
     }    
 
     render() {
+    
         return (
             <div className="list-books">
                 <div className="list-books-title">
                     <h1>MyReads</h1>
                 </div>
                 <div className="list-books-content">
-                    <BookShelf title='Books I am Reading' books={this.booksCurrentlyReading}/>
-                    <BookShelf title='Books I Want to Read' books={this.booksToRead}/>
-                    <BookShelf title='Books I have Read' books={this.booksHaveRead}/>
+                    <BookShelf 
+                        title='Books I am Reading' 
+                        books={this.booksCurrentlyReading} 
+                        changeShelf={this.props.changeShelf}
+                    />
+                    <BookShelf 
+                        title='Books I Want to Read' 
+                        books={this.booksToRead} 
+                        changeShelf={this.props.changeShelf}
+                    />
+                    <BookShelf 
+                        title='Books I have Read' 
+                        books={this.booksHaveRead} 
+                        changeShelf={this.props.changeShelf}
+                    />
                 </div>
                 <div className="open-search">
                     <Link to='/search'>Add a book</Link>

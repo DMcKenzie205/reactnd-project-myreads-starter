@@ -8,7 +8,7 @@ class Search extends Component {
 
     state = {
         query: '',
-        searchedBooks: []
+        books: []
     }
 
     updateQuery = (query) => {
@@ -18,11 +18,15 @@ class Search extends Component {
 
     updateNewBooks = (query) => {
         if (query) {
-            BooksAPI.search(query).then((searchedBooks) => {
-            this.setState({ searchedBooks: searchedBooks })
+            BooksAPI.search(query).then((books) => {
+                if (books.error) {
+                    this.setState({ books: [] })
+                } else {
+                    this.setState({ books: books })
+                }
             })
         } else {
-            this.setState({ searchedBooks: [] })
+            this.setState({ books: [] })
         }
     }
 
@@ -37,15 +41,15 @@ class Search extends Component {
                                 type="text" 
                                 placeholder="Search by title or author"
                                 value={this.state.query}
-                                onChange={(event) => this.updateQuery(event.target.value)}
+                                onChange={(ev) => this.updateQuery(ev.target.value)}
                             />
                     </div>
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid"></ol>
-                        {this.state.searchedBooks.map(searchedBook => (
-                            <li key={searchedBook.id}>
-                                <Books book={searchedBook}/>
+                        {this.state.books.map(book => (
+                            <li key={book.id}>
+                                <Books { ...book } changeShelf={this.props.changeShelf}/>
                             </li>
                         ))}
                 </div>
