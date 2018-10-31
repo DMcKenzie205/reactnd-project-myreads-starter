@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-import * as BooksAPI from './BooksAPI'
-import BookCase from './components/BookCase'
+import * as BooksAPI from './BooksAPI';
+import BookCase from './components/BookCase';
 import { Route } from 'react-router-dom';
-import Search from './components/search'
+import Search from './components/search';
 
 import './App.css'
 
@@ -19,13 +19,16 @@ class BooksApp extends React.Component {
         })
      }
 
+     changeShelf = (book, shelf) => {
+        BooksAPI.update(book, shelf)
+     }
 
     render() {
                 console.log(this.state.books);
         return (
             <div className="app">
                 <Route exact path='/' render={() => (
-                    <BookCase books={this.state.books}/>
+                    <BookCase books={this.state.books} changeShelf={this.changeShelf}/>
                 )}/>
                 <Route path='/search' render={() => (
                     <Search/>
