@@ -22,10 +22,10 @@ class BooksApp extends React.Component {
 
     // Helper function for changing the shelf a book is assigned to
     changeShelf = (book, shelf) => {
-        BooksAPI.update(book, shelf);
-
-        BooksAPI.getAll().then((books) => {
-            this.setState({ books: books })
+        BooksAPI.update(book, shelf).then(() => {
+            BooksAPI.getAll().then((books) => {
+                this.setState({ books: books })
+            })
         })
     }
 
@@ -34,10 +34,16 @@ class BooksApp extends React.Component {
         return (
             <div className="app">
                 <Route exact path='/' render={() => (
-                    <BookCase books={this.state.books} changeShelf={this.changeShelf}/>
+                    <BookCase 
+                        books={this.state.books} 
+                        changeShelf={this.changeShelf}
+                    />
                 )}/>
                 <Route path='/search' render={() => (
-                    <Search changeShelf={this.changeShelf}/>
+                    <Search 
+                        books={this.state.books} 
+                        changeShelf={this.changeShelf}
+                    />
                 )}/>  
             </div>
 
